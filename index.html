@@ -2,21 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="logo.png">
-<meta name="apple-mobile-web-app-title" content="PayPal">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="PayPal">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#eef0f5">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 <title>PayPal</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #eef0f5;
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
   .phone-wrap {
     width: 100%;
@@ -93,7 +99,6 @@
     flex-shrink: 0;
     overflow: hidden;
   }
-  /* Place your PayPal logo at: assets/paypal-logo.png */
   .pp-logo img { width: 26px; height: 26px; object-fit: contain; }
   .pp-logo-fallback {
     color: white; font-size: 20px; font-weight: 700;
@@ -155,7 +160,6 @@
     background: white;
     overflow: hidden;
   }
-  /* Place your Airbnb logo at: assets/airbnb-logo.png */
   .txn-logo-airbnb img { width: 28px; height: 28px; object-fit: contain; }
   .airbnb-fallback {
     font-size: 11px; font-weight: 800; color: #ff5a5f;
@@ -170,7 +174,6 @@
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  /* Place your Visa logo at: assets/visa-logo.png */
   .txn-logo-visa img { width: 28px; height: 16px; object-fit: contain; }
   .visa-fallback {
     color: white; font-size: 10px; font-weight: 800;
@@ -201,6 +204,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 8px 0 28px;
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
     z-index: 100;
   }
   .nav-item {
@@ -220,11 +224,20 @@
   }
   .send-fab svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 </style>
+<base target="_blank">
 </head>
 <body>
 <div class="phone-wrap">
 
-
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <div class="status-time">3:09</div>
+    <div class="status-icons">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg>
+    </div>
+  </div>
 
   <!-- Top Nav -->
   <div class="top-nav">
@@ -247,12 +260,12 @@
     <!-- Balance -->
     <div class="balance-card">
       <div class="pp-logo">
-        <img src="assets/paypal-logo.png" alt="PayPal"
+        <img src="logo.png" alt="PayPal"
              onerror="this.style.display='none'; document.getElementById('pp-fallback').style.display='block'">
         <span id="pp-fallback" class="pp-logo-fallback" style="display:none">P</span>
       </div>
       <div>
-        <div class="balance-amount">2300,52 USD</div>
+        <div class="balance-amount">2081,52 USD</div>
         <div class="balance-label">PayPal balance</div>
       </div>
     </div>
@@ -262,7 +275,6 @@
       <div class="progress-ring">
         <svg width="50" height="50" viewBox="0 0 50 50">
           <circle cx="25" cy="25" r="21" fill="none" stroke="#e0e0e0" stroke-width="3.5"/>
-          <!-- 3/5 = 60% → circumference = 131.95 → offset = 131.95 * 0.4 = 52.78 -->
           <circle cx="25" cy="25" r="21" fill="none" stroke="#0070ba" stroke-width="3.5"
             stroke-dasharray="131.95" stroke-dashoffset="52.78" stroke-linecap="round"/>
         </svg>
@@ -280,7 +292,7 @@
       <!-- Airbnb 1 -->
       <div class="txn-row">
         <div class="txn-logo-airbnb">
-          <img src="assets/airbnb-logo.png" alt="Airbnb"
+          <img src="logo11.png" alt="Airbnb"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
           <span class="airbnb-fallback" style="display:none">airbnb</span>
         </div>
@@ -295,7 +307,7 @@
       <!-- Airbnb 2 -->
       <div class="txn-row">
         <div class="txn-logo-airbnb">
-          <img src="assets/airbnb-logo.png" alt="Airbnb"
+          <img src="logo11.png" alt="Airbnb"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
           <span class="airbnb-fallback" style="display:none">airbnb</span>
         </div>
@@ -310,7 +322,7 @@
       <!-- Visa -->
       <div class="txn-row">
         <div class="txn-logo-visa">
-          <img src="assets/visa-logo.png" alt="Visa"
+          <img src="logo2.png" alt="Visa"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
           <span class="visa-fallback" style="display:none">VISA</span>
         </div>
@@ -325,7 +337,7 @@
       <!-- Airbnb 3 -->
       <div class="txn-row">
         <div class="txn-logo-airbnb">
-          <img src="assets/airbnb-logo.png" alt="Airbnb"
+          <img src="logo11.png" alt="Airbnb"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
           <span class="airbnb-fallback" style="display:none">airbnb</span>
         </div>
@@ -356,5 +368,17 @@
   </div>
 
 </div>
+
+<script>
+  // Update time
+  function updateTime() {
+    const now = new Date();
+    const h = now.getHours();
+    const m = now.getMinutes().toString().padStart(2, '0');
+    document.querySelector('.status-time').textContent = h + ':' + m;
+  }
+  updateTime();
+  setInterval(updateTime, 60000);
+</script>
 </body>
 </html>
