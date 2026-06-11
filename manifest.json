@@ -1,0 +1,18 @@
+{
+  "name": "PayPal",
+  "short_name": "PayPal",
+  "description": "PayPal Mobile",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef0f5",
+  "theme_color": "#eef0f5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
